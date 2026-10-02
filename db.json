@@ -29,6 +29,12 @@
       "especie": "Gato",
       "tutorId": "2",
       "id": "wvf0kMTJ8S0"
+    },
+    {
+      "nome": "Amora",
+      "especie": "Hamster",
+      "tutorId": "1",
+      "id": "V9bTKiCwfNE"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
