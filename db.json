@@ -13,12 +13,6 @@
   ],
   "pets": [
     {
-      "id": "1",
-      "nome": "Safira",
-      "especie": "Cachorro",
-      "tutorId": "1"
-    },
-    {
       "id": "2",
       "nome": "Nino",
       "especie": "Gato",
