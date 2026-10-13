@@ -24,16 +24,18 @@ function nomeDoTutor(tutorId) {
 }
 
 async function excluirPet(id) {
-  // Lógica para excluir o pet
-
+  // Solicita a confirmação do usuário.
   const confirmarExclusao = window.confirm(
     'Deseja realmente excluir esse pet?',
   );
 
   if (confirmarExclusao) {
+    // Envia a requisição para remover o pet pelo ID.
     await fetch(`${API_URL}/pets/${id}`, {
       method: 'DELETE',
     });
+
+    // Busca novamente os dados para atualizar a listagem.
     await carregarDados();
   }
 }
