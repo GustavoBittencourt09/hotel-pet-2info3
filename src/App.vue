@@ -1,6 +1,7 @@
 <script setup>
-import DefaultLayout from '@/components/layout/DefaultLayout.vue';
+import DefautLayout from './components/layout/DefautLayout.vue';
 </script>
+
 <template>
-  <DefaultLayout />
+  <DefautLayout/>
 </template>

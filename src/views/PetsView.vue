@@ -1,46 +1,42 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-
+import { RouterLink } from 'vue-router';
+('onMounted');
 const API_URL = 'http://localhost:3000';
+('API_URL');
 
 const pets = ref([]);
+('pets');
 const tutores = ref([]);
+('tutores');
 
 async function carregarDados() {
-  const respostaPets = await fetch(`${API_URL}/pets`);
-  pets.value = await respostaPets.json();
+  const respostaPets = await fetch(`${API_URL}/pets`); //vai trazer a url da api do pets
+  pets.value = await respostaPets.json(); // ele espera e depois chama em json
 
-  const respostaTutores = await fetch(`${API_URL}/tutores`);
-  tutores.value = await respostaTutores.json();
+  const respostaTutores = await fetch(`${API_URL}/tutores`); //vai trazer a url da api dos tutores
+  tutores.value = await respostaTutores.json(); // ele espera e depois chama em json
 }
-
 function nomeDoTutor(tutorId) {
   for (const tutor of tutores.value) {
     if (tutor.id === tutorId) {
       return tutor.nome;
     }
   }
-  return 'Tutor não encontrado';
-}
+} //função para excluir o pet 
+ async function excluirPet(petId) {
+  const confirmaExclusao = window.confirm('Tem certeza que deseja excluir este pet?');
 
-async function excluirPet(id) {
-  // Solicita a confirmação do usuário.
-  const confirmarExclusao = window.confirm(
-    'Deseja realmente excluir esse pet?',
-  );
-
-  if (confirmarExclusao) {
-    // Envia a requisição para remover o pet pelo ID.
-    await fetch(`${API_URL}/pets/${id}`, {
+  if (confirmaExclusao){
+    await fetch(`${API_URL}/pets/${petId}`, {
       method: 'DELETE',
-    });
-
-    // Busca novamente os dados para atualizar a listagem.
-    await carregarDados();
-  }
+  });
+    } await carregarDados(); // Recarrega a lista de pets após a exclusão
 }
 
-onMounted(carregarDados);
+onMounted(() => {
+  carregarDados();
+});
 </script>
 
 <template>
@@ -52,7 +48,6 @@ onMounted(carregarDados);
       </p>
     </header>
   </div>
-
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -62,6 +57,7 @@ onMounted(carregarDados);
         <th>Tutor</th>
         <th>Ações</th>
       </tr>
+   
     </thead>
     <tbody>
       <tr
@@ -73,15 +69,13 @@ onMounted(carregarDados);
         <td>{{ pet.especie }}</td>
         <td>{{ nomeDoTutor(pet.tutorId) }}</td>
         <td>
-          <RouterLink :to="`/pets/${pet.id}`"> Visualizar </RouterLink>
-          <button
-            class="btn btn-danger"
-            @click="excluirPet(pet.id)"
-          >
-            Excluir
-          </button>
+          <RouterLink :to="`/pets/${pet.id}`"> Visualizar </RouterLink> 
+          
+          <button class="btn btn-danger" @click="excluirPet(pet.id)"> Excluir </button>
         </td>
       </tr>
     </tbody>
   </table>
 </template>
+
+<script setup></script>
